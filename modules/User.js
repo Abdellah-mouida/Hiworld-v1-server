@@ -8,6 +8,7 @@ let UserSchema = new mongoose.Schema({
   email: {
     type: String,
     requiered: [true, "Email is Required"],
+    lowercase: true,
   },
   password: {
     type: String,
