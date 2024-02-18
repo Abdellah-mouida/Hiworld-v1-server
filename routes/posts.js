@@ -1,5 +1,6 @@
 let express = require("express");
 const Post = require("../modules/Post");
+const User = require("../modules/User");
 let router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -13,6 +14,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   let { description, image, user } = req.body;
+
   if (!description && !image) {
     res
       .status(400)
@@ -26,8 +28,11 @@ router.post("/", async (req, res) => {
       image: image,
       user: user,
     });
-    await newPost.save();
-    console.log(user);
+    let post = await newPost.save();
+    let current = await User.findById(user);
+    current.posts.push(post._id);
+    await current.save();
+    res.status(201).send("Post Created Succssfully");
   } catch (err) {
     console.log(err);
   }

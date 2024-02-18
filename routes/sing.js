@@ -23,6 +23,12 @@ async function emailAlreadyExist(email) {
 
 router.post("/", async (req, res) => {
   let user = req.body;
+  if (!/^[A-Za-z]+$/.test(req.body.name)) {
+    res
+      .status(400)
+      .send("The Name Should have only Alphabetic Characters From A to Z ");
+    return;
+  }
 
   if (!validateEmail(user.email)) {
     res.status(400).send("Invalid Email Format");

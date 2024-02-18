@@ -9,6 +9,7 @@ let indexRouter = require("./routes/index");
 let singRouter = require("./routes/sing");
 let loginRouter = require("./routes/login");
 let postsRouter = require("./routes/posts");
+let userRouter = require("./routes/user");
 
 let PORT = process.env.PORT || 8000;
 let mongoose = require("mongoose");
@@ -18,9 +19,9 @@ let db = mongoose.connection;
 db.on("error", (err) => console.error(err));
 db.once("open", () => console.log("Connected To DataBase"));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ limit: "15mb" }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: "15mb" }));
+// app.use(bodyParser.json({ limit: "15mb" }));
+app.use(express.json({ limit: "15mb" }));
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -30,5 +31,6 @@ app.use("/", indexRouter);
 app.use("/sing", singRouter);
 app.use("/login", loginRouter);
 app.use("/posts", postsRouter);
+app.use("/user", userRouter);
 
 app.listen(PORT);
