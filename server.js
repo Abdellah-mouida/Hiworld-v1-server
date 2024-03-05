@@ -10,6 +10,9 @@ let singRouter = require("./routes/sing");
 let loginRouter = require("./routes/login");
 let postsRouter = require("./routes/posts");
 let userRouter = require("./routes/user");
+let validateRouter = require("./routes/validate");
+let commentsRouter = require("./routes/comments");
+let chatRouter = require("./routes/chat");
 
 let PORT = process.env.PORT || 8000;
 let mongoose = require("mongoose");
@@ -32,5 +35,8 @@ app.use("/sing", singRouter);
 app.use("/login", loginRouter);
 app.use("/posts", postsRouter);
 app.use("/user", userRouter);
+app.use("/comments", commentsRouter);
+app.use("/validate", validateRouter);
+app.use("/chat", chatRouter);
 
 app.listen(PORT);

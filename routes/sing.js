@@ -43,11 +43,13 @@ router.post("/", async (req, res) => {
         .send("Email is already exist , Please try with an other email");
       return;
     }
+
     let hashedPassword = await bcrypt.hash(user.password, 10);
     let newUser = new User({
       name: user.name,
       email: user.email,
       password: hashedPassword,
+      SERIAL_CODE: crypto.randomBytes(16).toString("base64url"),
     });
     await newUser.save();
     res.status(201).send({ message: "You Singed Succssfully", user: newUser });
