@@ -5,14 +5,35 @@ let router = express.Router();
 
 // Send all Posts
 router.get("/", async (req, res) => {
+  let { page } = req.query;
+  let limit = 6;
   try {
-    let posts = await Post.aggregate([{ $sample: { size: 5 } }]).then(
-      (rondomData) => {
-        Post.populate(rondomData, { path: "user" }).then((data) =>
-          res.send(data)
-        );
-      }
-    );
+    let posts = await Post.find()
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .populate("user")
+      .exec();
+    res.send(posts);
+  } catch (err) {
+    console.log(err);
+  }
+  // try {
+  //   let posts = await Post.aggregate([{ $sample: { size: 6 } }]).then(
+  //     (rondomData) => {
+  //       Post.populate(rondomData, { path: "user" }).then((data) =>
+  //         res.send(data)
+  //       );
+  //     }
+  //   );
+  // } catch (err) {
+  //   console.log(err);
+  // }
+});
+router.get("/totalLength", async (req, res) => {
+  try {
+    let count = await Post.countDocuments({});
+
+    res.send({ count });
   } catch (err) {
     console.log(err);
   }

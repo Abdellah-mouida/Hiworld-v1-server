@@ -33,7 +33,6 @@ router.get("/public/:id", async (req, res) => {
       },
     });
     res.send({ user });
-    
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -107,7 +106,6 @@ router.post("/:id/more-info", async (req, res) => {
     user.bio = bio;
     await user.save();
     res.send("User INFO Added Succssfully");
-    console.log(user);
   } catch (err) {
     res.send(err);
   }
