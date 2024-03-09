@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "15mb" }));
 app.use(express.json({ limit: "15mb" }));
 app.use(
   cors({
-    origin: "https://hiworld-abdellah.netlify.app",
+    origin: "https://hiworld-client.onrender.com",
   })
 );
 // Enable CORS
