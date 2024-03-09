@@ -7,7 +7,7 @@ let router = express.Router();
 
 function validateEmail(email) {
   let pattern = /^[\w\.-]+@gmail+\.[a-zA-Z]{2,}$/;
-  //   let pattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+  //   let pattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/
   return pattern.test(email);
 }
 
