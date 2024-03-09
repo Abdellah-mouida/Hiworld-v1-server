@@ -27,16 +27,10 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "15mb" }));
 app.use(express.json({ limit: "15mb" }));
 app.use(
   cors({
-    origin: "http://localhost:3000/",
+    origin: "*",
   })
 );
 // Enable CORS
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // or specify specific origin
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
 
 app.use("/", indexRouter);
 app.use("/sing", singRouter);
