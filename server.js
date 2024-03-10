@@ -17,9 +17,27 @@ let chatRouter = require("./routes/chat");
 let PORT = process.env.PORT || 8000;
 let mongoose = require("mongoose");
 
-mongoose.connect(
-  "mongodb+srv://Abdellah:WVWMcDdM4pr89SZV@abdellah.bwey2wf.mongodb.net/?retryWrites=true&w=majority&appName=Abdellah"
-);
+// Set Mongoose connection options
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  ssl: true, // Enable SSL/TLS
+  sslValidate: true, // Enable SSL validation
+};
+
+const URI =
+  "mongodb+srv://Abdellah:WVWMcDdM4pr89SZV@abdellah.bwey2wf.mongodb.net/?retryWrites=true&w=majority&appName=Abdellah";
+// Connect to MongoDB using Mongoose
+mongoose
+  .connect(URI, options)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    // Start your application logic here
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
 let db = mongoose.connection;
 db.on("error", (err) => console.error(err));
 db.once("open", () => console.log("Connected To DataBase"));
