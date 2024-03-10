@@ -25,7 +25,11 @@ db.once("open", () => console.log("Connected To DataBase"));
 app.use(bodyParser.urlencoded({ extended: true, limit: "15mb" }));
 // app.use(bodyParser.json({ limit: "15mb" }));
 app.use(express.json({ limit: "15mb" }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 // Enable CORS
 
 app.use("/", indexRouter);
