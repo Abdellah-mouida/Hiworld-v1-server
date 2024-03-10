@@ -21,8 +21,7 @@ let mongoose = require("mongoose");
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  ssl: true, // Enable SSL/TLS
-  sslValidate: true, // Enable SSL validation
+  ssl: true,
 };
 
 const URI =
@@ -45,8 +44,8 @@ db.once("open", () => console.log("Connected To DataBase"));
 app.use(bodyParser.urlencoded({ extended: true, limit: "15mb" }));
 // app.use(bodyParser.json({ limit: "15mb" }));
 app.use(express.json({ limit: "15mb" }));
-app.use(cors());
 // Enable CORS
+app.use(cors());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
