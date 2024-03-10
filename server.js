@@ -29,6 +29,14 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "15mb" }));
 app.use(express.json({ limit: "15mb" }));
 app.use(cors());
 // Enable CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.use("/", indexRouter);
 app.use("/sing", singRouter);
